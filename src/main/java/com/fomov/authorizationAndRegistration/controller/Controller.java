@@ -28,17 +28,15 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 
-        switch (action) {
-            case "authorization":
-            	request.getRequestDispatcher("/WEB-INF/jsp/authorization.jsp").forward(request, response);
-                break;
-            case "registration":
-            	request.getRequestDispatcher("/WEB-INF/jsp/registration.jsp").forward(request, response);	
-        		break;
-            default:
-            	System.out.println("Error");
-                break;
-        }
+		if("authorization".equals(action)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/authorization.jsp").forward(request, response);
+		}
+		else if("registration".equals(action)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/registration.jsp").forward(request, response);
+		}
+		else {
+			System.out.println("Error");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
