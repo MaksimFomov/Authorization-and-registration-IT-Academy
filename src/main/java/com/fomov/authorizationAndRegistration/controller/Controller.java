@@ -21,7 +21,7 @@ public class Controller extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init();
 
-        user = new User("Max", "02.04.2003", "123");
+        user = new User("maksimfomov26@gmail.com", "02.04.2003", "123");
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,17 +45,22 @@ public class Controller extends HttpServlet {
         String action = request.getParameter("action");
         
         if ("register".equals(action)) {
-    		user.setLogin(request.getParameter("login"));
-    		user.setDateOfBirthday(request.getParameter("dateOfBirthday"));
-    		user.setPassword(request.getParameter("password"));
-    		
-    		request.setAttribute("user", user);
-    		
-    		request.getRequestDispatcher("/WEB-INF/jsp/resultAuth.jsp").forward(request, response);	
+        	if(request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+        		user.setEmail(request.getParameter("email"));
+        		user.setDateOfBirthday(request.getParameter("dateOfBirthday"));
+        		user.setPassword(request.getParameter("password"));
+        		
+        		request.setAttribute("user", user);
+        		request.getRequestDispatcher("/WEB-INF/jsp/resultAuth.jsp").forward(request, response);	
+        	}
+        	else {
+         		System.out.println("Passwords do not match");
+            	request.getRequestDispatcher("/WEB-INF/jsp/registration.jsp").forward(request, response);
+        	}
         }
         else if ("login".equals(action)) {
-        	request.setAttribute("user", user);
-        	if(request.getParameter("login").equals(user.getLogin()) && request.getParameter("password").equals(user.getPassword())) {
+        	if(request.getParameter("email").equals(user.getEmail()) && request.getParameter("password").equals(user.getPassword())) {
+            	request.setAttribute("user", user);
             	request.getRequestDispatcher("/WEB-INF/jsp/resultAuth.jsp").forward(request, response);
         	}
         	else {
@@ -63,6 +68,9 @@ public class Controller extends HttpServlet {
             	request.getRequestDispatcher("/WEB-INF/jsp/authorization.jsp").forward(request, response);
         	}
         }
+		else {
+			System.out.println("Error");
+		}
 	}
 
 }

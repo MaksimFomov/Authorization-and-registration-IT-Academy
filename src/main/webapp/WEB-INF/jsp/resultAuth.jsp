@@ -9,8 +9,8 @@
 <body>
 	<jsp:useBean id="user" class="com.fomov.authorizationAndRegistration.bean.User" scope="request" />
 	<h2>
-		Login:
-		<jsp:getProperty property="login" name="user" />
+		Email:
+		<jsp:getProperty property="email" name="user" />
 	</h2>
 	
 	<h2>
@@ -22,5 +22,10 @@
 		Password:
 		<jsp:getProperty property="password" name="user" />	
 	</h2>
+	
+	<br/>
+	<br/>
+	
+	<a href="Controller?action=authorization">Exit</a>
 </body>
 </html>

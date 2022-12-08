@@ -1,22 +1,24 @@
 package com.fomov.authorizationAndRegistration.bean;
 
 public class User {
-	private String login;
+	private String email;
 	private String password;
 	private String dateOfBirthday;
 	
-	public User(String login, String password, String dateOfBirthday) {
-		this.login = login;
+	public User() {}
+	
+	public User(String email, String password, String dateOfBirthday) {
+		this.email = email;
 		this.password = password;
 		this.dateOfBirthday = dateOfBirthday;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getPassword() {
