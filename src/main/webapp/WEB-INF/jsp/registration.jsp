@@ -26,7 +26,7 @@
                         </div>
                         
                         <div class="field input-field">
-                            <input type="text" name="dateOfBirthday" placeholder="Date of birthday" class="input">
+                            <input type="date" name="dateOfBirthday" placeholder="Date of birthday" class="input">
                         </div>
 
                         <div class="field input-field">

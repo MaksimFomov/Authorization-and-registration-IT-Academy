@@ -45,16 +45,25 @@ public class Controller extends HttpServlet {
         String action = request.getParameter("action");
         
         if ("register".equals(action)) {
-        	if(request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+        	if(request.getParameter("password").equals(request.getParameter("confirmPassword")) && request.getParameter("email") != "" && request.getParameter("password") != "" && request.getParameter("dateOfBirthday") != "") {
+        		String dateOfBirthday = "";
+            	var arrayOfStrings = request.getParameter("dateOfBirthday").split("-");
+            	for(int i = 2; i >= 0; --i) {
+           			dateOfBirthday += arrayOfStrings[i];
+           			if(i != 0) {
+               			dateOfBirthday += ".";
+           			}
+           		}
+        		
         		user.setEmail(request.getParameter("email"));
-        		user.setDateOfBirthday(request.getParameter("dateOfBirthday"));
+        		user.setDateOfBirthday(dateOfBirthday);
         		user.setPassword(request.getParameter("password"));
         		
         		request.setAttribute("user", user);
         		request.getRequestDispatcher("/WEB-INF/jsp/resultAuth.jsp").forward(request, response);	
         	}
         	else {
-         		System.out.println("Passwords do not match");
+         		System.out.println("Passwords do not match or you did not complete all the fields");
             	request.getRequestDispatcher("/WEB-INF/jsp/registration.jsp").forward(request, response);
         	}
         }
